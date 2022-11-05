@@ -1,1 +1,12 @@
 @import "../node_modules/normalize.css/normalize";
+
+@import "./styles/variables";
+@import "./styles/global";
+
+@import "./styles/main-page";
+@import "./styles/main-table";
+@import "./styles/flight-period";
+@import "./styles/flight-info";
+@import "./styles/flight-year";
+@import "./styles/flight-canvas";
+@import "./styles/canvas";

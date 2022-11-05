@@ -1,80 +1,42 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { fetchFlights } from "./redux/actions/flights";
-import {
-  groupSortedFlightsByMonth,
-  groupSortedFlightsByYears,
-  sortFlightsByDate,
-  summarizeData,
-} from "./util/flights";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FlightPeriod from "./pages/FlightPeriod";
+import Main from "./pages/Main";
+import { fetchFlights, setFlights } from "./redux/actions/flights";
+import mock from "./mock/flights-mock";
+import FlightYear from "./pages/FlightYear";
 
 function App(props) {
-  const { flights, fetchFlights } = props;
+  const { fetchFlights, setFlights } = props;
 
   useEffect(() => {
-    fetchFlights().then((res) => {
-      // console.log(flights);
-      // console.log(groupSortedFlightsByYears(flights));
-      // console.log(summarizeData(flights, "timeFlight"));
-    });
+    fetchFlights();
+    // setFlights(mock);
   }, []);
 
   return (
-    <div>
-      {flights && console.log(groupSortedFlightsByMonth(flights))}
-      {flights &&
-        groupSortedFlightsByMonth(flights).map((flight, index) => (
-          <div key={index}>
-            <h2>{flight.year}</h2>
-
-            {console.log(flight.months)}
-
-            {flight.months.map((month, idx) => (
-              <div key={idx}>
-                <h2>{month.month}</h2>
-              </div>
-            ))}
-
-            <hr />
-          </div>
-        ))}
-      {/* {flights
-        ? groupSortedFlightsByYears(flights).map((yearGroup, idy) => (
-            
-            // return (
-            //   <div key={idy}>
-            //     <h1>
-            //       {yearGroup[0].dateFlight.split("-")[0]} Итого:
-            //       {summarizeData(yearGroup, "timeFlight")}
-            //     </h1>
-
-            //     {groupSortedFlightsByMonth(yearGroup).map((monthGroup, idm) => {
-            //       console.log(monthGroup);
-            //       return (
-            //         <p key={idy * 10 + idm}>
-            //           {monthGroup[0].dateFlight.split("-")[1]} Итого:
-            //           {summarizeData(monthGroup, "timeFlight")}
-            //         </p>
-            //       );
-            //     })}
-            //   </div>
-            // );
-          ))
-        : "loading...."} */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/period/:period" element={<FlightPeriod />} />
+        <Route path="/year/:year" element={<FlightYear />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    flights: state.flights.flights,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     flights: state.flights.flights,
+//   };
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchFlights: (value) => dispatch(fetchFlights(value)),
+    setFlights: (value) => dispatch(setFlights(value)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

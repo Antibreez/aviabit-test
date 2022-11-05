@@ -92,7 +92,7 @@ const getRandomFlight = () => {
     timeNight,
     timeBiologicalNight,
     timeWork,
-    type: getRandomInteger(0, 1),
+    type: Math.random() > 0.8 ? 1 : 0,
     takeoff: getRandomArrayItem(Airports),
     landing: getRandomArrayItem(Airports),
   };
@@ -115,6 +115,8 @@ const flights = Array.from({ length: 100 }, getRandomFlight);
 //   console.log(flight);
 // });
 
-fs.writeFile("new-json.json", JSON.stringify(flights, null, " "), (error) =>
-  console.log(error)
+fs.writeFile(
+  "./src/mock/flights-mock.json",
+  JSON.stringify(flights, null, " "),
+  (error) => console.log(error)
 );

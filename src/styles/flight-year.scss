@@ -1,0 +1,10 @@
+.flight-year {
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+@media (max-width: $mobile) {
+  .flight-year {
+    padding-top: 30px;
+  }
+}

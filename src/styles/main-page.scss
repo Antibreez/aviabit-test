@@ -1,0 +1,13 @@
+.main-page {
+  padding-top: 100px;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+@media (max-width: $mobile) {
+  .main-page {
+    padding-top: 50px;
+  }
+}

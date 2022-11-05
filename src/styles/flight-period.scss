@@ -1,0 +1,43 @@
+.flight-period {
+  padding: 50px 0 100px;
+
+  &__block {
+    &:not(:last-child) {
+      margin-bottom: 80px;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+  }
+
+  &__tab {
+    background-color: rgb(255, 225, 230);
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    padding-bottom: 14px;
+    min-width: 220px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.active {
+      opacity: 1;
+      font-weight: bold;
+      border-bottom: 4px solid darkred;
+      padding-bottom: 10px;
+      background-color: pink;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .flight-period {
+    &__tabs {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
